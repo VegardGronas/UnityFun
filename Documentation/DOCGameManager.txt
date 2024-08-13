@@ -1,0 +1,112 @@
+GameManager Documentation
+Overview
+The GameManager class is designed to manage game state in a Unity game. It follows the Singleton pattern to ensure there is only one instance of the GameManager throughout the game. This class handles game mode setup, pause functionality, and manages game presets.
+
+Namespace
+csharp
+Copy code
+namespace UnityFun
+{
+    // Class and enum definitions here
+}
+Enum: GameMode
+csharp
+Copy code
+public enum GameMode { ThirdPerson, FirstPerson }
+Description:
+
+Defines the different game modes available.
+Values:
+
+ThirdPerson: Third-person perspective mode.
+FirstPerson: First-person perspective mode.
+Class: GameManager
+csharp
+Copy code
+public class GameManager : MonoBehaviour
+{
+    // Fields and Properties
+    // Methods
+}
+Fields
+_instance: Static instance of the GameManager. Used to ensure only one instance exists.
+
+_paused: Private boolean indicating whether the game is paused.
+
+_pauseCanvas: Private GameObject used to show the pause menu.
+
+_gamePreset: Serialized field of type GamePresets, containing settings and prefabs for the game.
+
+_spawnTarget: Serialized field of type Transform, specifying the spawn location for the character.
+
+_pauseInputAction: Serialized field of type InputActionReference, used to detect pause input.
+
+_globalPause: Serialized field of type bool, determining if pausing affects global time scale.
+
+Properties
+GamePreset: Public getter for the _gamePreset field.
+Methods
+Instance
+csharp
+Copy code
+public static GameManager Instance
+Description:
+
+Gets the singleton instance of GameManager. Creates a new instance if none exists.
+Returns:
+
+The singleton GameManager instance.
+OnEnable
+csharp
+Copy code
+private void OnEnable()
+Description:
+
+Subscribes to the pause input action when the component is enabled.
+OnDisable
+csharp
+Copy code
+private void OnDisable()
+Description:
+
+Unsubscribes from the pause input action when the component is disabled.
+Start
+csharp
+Copy code
+private void Start()
+Description:
+
+Initializes the pause canvas and sets the initial game mode. Configures the cursor lock state.
+PauseInput
+csharp
+Copy code
+private void PauseInput(InputAction.CallbackContext context)
+Description:
+
+Handles the pause input, toggles the paused state, updates the pause canvas visibility, and manages cursor lock and time scale.
+SetGameMode
+csharp
+Copy code
+private void SetGameMode()
+Description:
+
+Configures the game mode based on _gamePreset. Instantiates the appropriate character prefab at the spawn position.
+Details:
+
+If _spawnTarget is not null, the character spawns at its position.
+If _spawnTarget is null, the character spawns at the GameManager's position.
+Checks the GameMode and instantiates the corresponding prefab (thirdPersonPrefab or firstPersonPrefab).
+Usage
+Setting Up:
+
+Attach the GameManager script to a GameObject in your scene.
+Assign the GamePresets, Transform, InputActionReference, and other serialized fields in the Unity Inspector.
+Accessing the Singleton Instance:
+
+Use GameManager.Instance to access the GameManager from other scripts.
+Pause Functionality:
+
+Press the configured input to toggle pause. The pause menu will be shown or hidden, and the game time scale will be adjusted if _globalPause is true.
+Game Mode Configuration:
+
+Ensure that the GamePresets are correctly assigned with the required prefabs and game modes.

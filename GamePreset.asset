@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64105590b6898b74285f5c0d42dfe447, type: 3}
+  m_Name: GamePreset
+  m_EditorClassIdentifier: 
+  gameMode: 0
+  pauseCanvas: {fileID: 6111634954700822809, guid: 47604b00274759d469939f9b2ca7e350,
+    type: 3}
+  gravity: -9
+  thirdPersonPrefab: {fileID: 453962403510509497, guid: f5b00ed6c00dd324e9a85a9e86ad5a29,
+    type: 3}
+  firstPersonPrefab: {fileID: 7737859808738112702, guid: 11fb0a5cec0c00f4e82c54fa8651afcc,
+    type: 3}

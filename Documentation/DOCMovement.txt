@@ -1,0 +1,121 @@
+Movement Class Documentation
+Overview
+The Movement class is responsible for handling player movement and gravity in a Unity game. It utilizes the CharacterController component to apply movement and gravity effects, supporting both normal movement and sprinting.
+
+Namespace
+csharp
+Copy code
+namespace UnityFun
+{
+    // Class definition here
+}
+Class: Movement
+csharp
+Copy code
+[RequireComponent(typeof(CharacterController))]
+public class Movement : MonoBehaviour
+{
+    // Fields and Properties
+    // Methods
+}
+Fields
+_verticalVelocity: Private float that tracks the vertical velocity for gravity effects.
+
+_characterController: Private CharacterController component used for movement and collision detection.
+
+moveSpeed: Public float specifying the base movement speed of the player.
+
+sprintSpeed: Public float specifying additional speed applied when sprinting. This value is added to moveSpeed when the player is sprinting.
+
+isSprinting: Public bool indicating whether the player is currently sprinting.
+
+Methods
+Awake
+csharp
+Copy code
+private void Awake()
+Description:
+
+Initializes the _characterController by getting the component attached to the GameObject.
+Update
+csharp
+Copy code
+private void Update()
+Description:
+
+Calls ApplyGravity to update the vertical velocity and apply gravity effects every frame.
+MoveController
+csharp
+Copy code
+public void MoveController(Vector3 direction)
+Description:
+
+Moves the player based on the input direction and current movement state (walking or sprinting).
+Parameters:
+
+direction: The direction vector to move the player in.
+Details:
+
+Multiplies the direction by moveSpeed or (moveSpeed + sprintSpeed) depending on whether the player is sprinting.
+RotateController
+csharp
+Copy code
+public void RotateController(Quaternion rotation)
+Description:
+
+Rotates the player to the specified rotation.
+Parameters:
+
+rotation: The target rotation for the player.
+ApplyGravity
+csharp
+Copy code
+private void ApplyGravity()
+Description:
+
+Applies gravity to the player. Adjusts _verticalVelocity based on whether the player is grounded or in the air.
+Details:
+
+Decreases _verticalVelocity when the player is not grounded.
+Resets _verticalVelocity to a small negative value if it is less than zero and the player is grounded.
+Moves the player downwards based on _verticalVelocity to simulate gravity.
+Usage
+Setting Up:
+
+Attach the Movement script to a GameObject with a CharacterController component in your scene.
+Configuration:
+
+Set the moveSpeed and sprintSpeed fields in the Unity Inspector to control the player's movement speed and sprinting behavior.
+Movement and Rotation:
+
+Call MoveController(Vector3 direction) to move the player in a given direction.
+Call RotateController(Quaternion rotation) to rotate the player to a specified orientation.
+Gravity Handling:
+
+Gravity is automatically applied based on the player's grounded state. Ensure the CharacterController is configured correctly to interact with the environment.
+Example
+Here’s an example of how you might use the Movement class:
+
+csharp
+Copy code
+public class PlayerController : MonoBehaviour
+{
+    private Movement _movement;
+    private Transform _playerTransform;
+
+    private void Start()
+    {
+        _movement = GetComponent<Movement>();
+        _playerTransform = transform;
+    }
+
+    private void Update()
+    {
+        Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+        _movement.MoveController(moveDirection);
+
+        Quaternion targetRotation = Quaternion.Euler(0, Input.GetAxis("Mouse X") * 10f, 0);
+        _movement.RotateController(targetRotation);
+    }
+}
+This example demonstrates how to move and rotate the player using the Movement class. The MoveController method is used to handle player movement based on input, while the RotateController method adjusts the player's rotation.

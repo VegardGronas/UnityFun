@@ -1,0 +1,113 @@
+Player Class Documentation
+Overview
+The Player class manages player movement and input handling in Unity. It interacts with movement and camera rig components and processes input actions for movement and sprinting. This class is designed to be extensible for different player types and behaviors.
+
+Namespace
+csharp
+Copy code
+namespace UnityFun
+{
+    // Class definition here
+}
+Class: Player
+csharp
+Copy code
+public class Player : MonoBehaviour
+{
+    // Fields and Properties
+    // Methods
+}
+Fields
+_moveInputValue: Protected Vector2 that stores the player's movement input value.
+
+_movementComponent: Serialized field of type Movement, responsible for handling player movement mechanics.
+
+_cameraRigg: Serialized field of type CameraRigg, responsible for handling camera rig functionalities and input.
+
+_moveInputAction: Serialized field of type InputActionReference, used to detect and handle movement input.
+
+_sprintInputAction: Serialized field of type InputActionReference, used to detect and handle sprint input.
+
+Methods
+MoveInput
+csharp
+Copy code
+private void MoveInput(InputAction.CallbackContext context)
+Description:
+
+Handles the movement input. Updates _moveInputValue based on the input action context.
+Parameters:
+
+context: The InputAction.CallbackContext providing the input value.
+SprintInput
+csharp
+Copy code
+private void SprintInput(InputAction.CallbackContext context)
+Description:
+
+Handles the sprint input. Sets the isSprinting property of the _movementComponent based on whether the sprint action is performed.
+Parameters:
+
+context: The InputAction.CallbackContext providing information about the input action.
+EnableInput
+csharp
+Copy code
+public virtual void EnableInput()
+Description:
+
+Subscribes to movement and sprint input actions. Enables input handling for the Player and the associated CameraRigg.
+Details:
+
+Adds event handlers to the performed and canceled events of the _moveInputAction and _sprintInputAction.
+Calls EnableInput on the _cameraRigg component.
+DisableInput
+csharp
+Copy code
+public virtual void DisableInput()
+Description:
+
+Unsubscribes from movement and sprint input actions. Disables input handling for the Player and the associated CameraRigg.
+Details:
+
+Removes event handlers from the performed and canceled events of the _moveInputAction and _sprintInputAction.
+Calls DisableInput on the _cameraRigg component.
+Usage
+Setting Up:
+
+Attach the Player script to a GameObject in your scene.
+Assign the Movement, CameraRigg, and InputActionReference fields in the Unity Inspector.
+Enabling Input:
+
+Call EnableInput to start listening for movement and sprint input actions. This should be done when the player character is active or ready to receive input.
+Disabling Input:
+
+Call DisableInput to stop listening for input actions. This should be done when the player character is inactive or not ready to receive input.
+Input Configuration:
+
+Ensure that the InputActionReference fields are correctly configured with the appropriate input actions for movement and sprinting.
+Example
+Here’s an example of how you might use the Player class in a derived class or context:
+
+csharp
+Copy code
+public class CustomPlayer : Player
+{
+    protected override void Start()
+    {
+        base.Start();
+        // Additional setup or customization
+    }
+
+    public override void EnableInput()
+    {
+        base.EnableInput();
+        // Additional input setup
+    }
+
+    public override void DisableInput()
+    {
+        base.DisableInput();
+        // Additional input teardown
+    }
+}
+This derived class inherits from Player and overrides methods to provide custom functionality while retaining the base behavior.
