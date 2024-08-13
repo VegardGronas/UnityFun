@@ -7,11 +7,12 @@ namespace UnityFun
 {
     public class ThirdPerson : Player
     {
-        
+        [SerializeField] private Animator _animator;
         [SerializeField] private Transform _characterTransform;
-
         [SerializeField] private Vector3 _characterOffset;
         [SerializeField] private float _characterRotateSpeed = 15f;
+
+        [SerializeField] private float _moveSpeedDamper = 100;
 
         private void Awake()
         {
@@ -32,6 +33,13 @@ namespace UnityFun
         private void Update()
         {
             MovePlayer();
+
+            if(_animator)
+            {
+                _animator.SetBool("isMoving", _movementComponent.isMoving);
+
+                _animator.SetFloat("moveSpeed", _movementComponent.CurrentSpeed / _moveSpeedDamper);
+            }
         }
 
         private void LateUpdate()
