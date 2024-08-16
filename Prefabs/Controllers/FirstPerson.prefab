@@ -49,9 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementComponent: {fileID: 4083492528752718950}
   _cameraRigg: {fileID: 2771051875016427733}
-  _moveInputAction: {fileID: -5591354096233952758, guid: fa953105589f8194fa0abfa2a6caadb2,
+  _moveInputAction: {fileID: 6780385947636831455, guid: fa953105589f8194fa0abfa2a6caadb2,
     type: 3}
-  _sprintInputAction: {fileID: -4542481350163238563, guid: fa953105589f8194fa0abfa2a6caadb2,
+  _sprintInputAction: {fileID: 428112030303024547, guid: fa953105589f8194fa0abfa2a6caadb2,
+    type: 3}
+  _jumpInputAction: {fileID: -1653671247577692526, guid: fa953105589f8194fa0abfa2a6caadb2,
     type: 3}
 --- !u!114 &4083492528752718950
 MonoBehaviour:
@@ -65,10 +67,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea13386a9fb6dc43adc5b7b0cf2c3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravity: -9
   moveSpeed: 2
+  jumpStrength: 5
+  gravity: 9.81
   sprintSpeed: 1
   isSprinting: 0
+  isMoving: 0
 --- !u!143 &3165364161883217576
 CharacterController:
   m_ObjectHideFlags: 0
@@ -173,6 +177,12 @@ PrefabInstance:
       propertyPath: invertPitch
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9086574370590408372, guid: c274e2eb23b40ca47b4199561bd3358d,
+        type: 3}
+      propertyPath: _lookInputAction
+      value: 
+      objectReference: {fileID: 1742176141582317604, guid: fa953105589f8194fa0abfa2a6caadb2,
+        type: 3}
     - target: {fileID: 9086574370590408372, guid: c274e2eb23b40ca47b4199561bd3358d,
         type: 3}
       propertyPath: performCollision
