@@ -14,6 +14,7 @@ namespace UnityFun
 
         [Tooltip("Offset applied whenever following another gameobject")]
         [SerializeField]private Vector3 _offset;
+        [SerializeField] private Vector3 _viewOffset;
         [SerializeField] private InputActionReference _lookInputAction;
         [SerializeField] private Transform _yawController;
         [SerializeField] private Transform _pitchController;
@@ -57,6 +58,7 @@ namespace UnityFun
         {
             Vector3 targetPos = position + _offset;
             transform.position = targetPos;
+            _cameraSlot.localPosition = _viewOffset;
         }
 
         private void Collision()
